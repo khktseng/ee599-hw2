@@ -105,10 +105,6 @@ def test_fifo_tb_uvm():
     print("Running test_fifo_tb_uvm")
     return run_process(['vcs', '-full64', '-sverilog', '-timescale=1ns/1ps', '-debug_access+pp', 'tests/fifo_tb_uvm.v', 'verilog/fifo.v', 'verilog/SizedFIFO.v'])
 
-def test_fifo_tb():
-    print("Running test_fifo_tb")
-    return run_process(['vcs', '-full64', '-sverilog', '-timescale=1ns/1ps', '-debug_access+pp', 'tests/fifo_tb.v', 'verilog/fifo.v', 'verilog/SizedFIFO.v'])
-
 def test_ram_sync_1r1w_tb_uvm():
     print("Running test_ram_sync_1r1w_tb_uvm")
     return run_process(['vcs', '-full64', '-sverilog', '-timescale=1ns/1ps', '-debug_access+pp', 'tests/ram_sync_1r1w_tb_uvm.v', 'verilog/ram_sync_1r1w.v'])
