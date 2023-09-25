@@ -4,7 +4,7 @@ EE 599: Special Topic on Complex Digital ASIC System Design, Fall 2023
 
 ## 1. Introduction
 
-This homework is from Stanford University EE272 Homework 2 Spring 2023. In this homework, you will design and test the constituent blocks of a convolutional neural network (CNN) accelerator. To check for correctness of the individual blocks you will also be responsible for writing “unit” tests in the form of either directed tests  or random tests. You will write random tests using UVM-style SystemVerilog. The code repository for this homework is at: [https://github.com/usc-chips/ee599-hw2-fall2023.git](https://github.com/usc-chips/ee599-hw2-fall2023.git).
+In this homework, you will design and test the constituent blocks of a convolutional neural network (CNN) accelerator. To check for correctness of the individual blocks you will also be responsible for writing “unit” tests in the form of either directed tests  or random tests. You will write random tests using UVM-style SystemVerilog. The code repository for this homework is at: [https://github.com/usc-chips/ee599-hw2-fall2023.git](https://github.com/usc-chips/ee599-hw2-fall2023.git).
 
 **One of the key points you must takeaway from this class is that design and testing always go hand in hand. If you write a module, you must also write its test, and in many cases you must write the test first, so that as soon as your test passes you know you are done. It is a good practice to build up your large design from small blocks, that you first unit test, and once they are correct, integrate them to create your larger design and test it. This will greatly reduce the time you spend in debugging your integrated design, and make it easier to isolate issues. It will also make your project easier to maintain.**
 
