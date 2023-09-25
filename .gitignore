@@ -1,0 +1,7 @@
+data/layer1_ofmap.txt
+data/layer3_ofmap.txt
+data/layer2_ofmap.txt
+conv_gold_test
+conv_gold
+conv_gold_tiled_test
+ofmap_data.txt
