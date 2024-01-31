@@ -65,6 +65,9 @@ void run_layer(string layer_name){
                 gold_ofmap_file >> tmp;
 
                 if(tmp != ofmap[i][j][k]){
+			
+			printf("i=%d, j=%d, k=%d, tmp=%d, ofmap=%d\n", i, j, k, tmp, ofmap[i][j][k]);
+
                     std::cout << "Error! Output does not match gold" << std::endl;
                     return;
                 }
