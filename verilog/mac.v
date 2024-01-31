@@ -1,3 +1,31 @@
+module multiplier
+#(
+  parameter A_WIDTH = 16,
+  parameter B_WIDTH = 16,
+  parameter P_WIDTH = 32
+)(
+  input signed [A_WIDTH-1:0] a,
+  input signed [B_WIDTH-1:0] b,
+  output signed [P_WIDTH-1:0] p
+);
+  assign p = a * b;
+endmodule
+
+
+module adder
+#(
+  parameter A_WIDTH = 32,
+  parameter B_WIDTH = 32,
+  parameter S_WIDTH = 32
+)(
+  input signed [A_WIDTH-1:0] a,
+  input signed [B_WIDTH-1:0] b,
+  output signed [S_WIDTH-1:0] s
+);
+  assign s = a + b;
+endmodule
+
+
 module mac
 #(
   parameter IFMAP_WIDTH = 16,
@@ -34,5 +62,42 @@ module mac
 
   // Your code starts here
   
+  wire signed [OFMAP_WIDTH-1:0] prd;
+  wire signed [OFMAP_WIDTH-1:0] accum;
+
+  multiplier #(IFMAP_WIDTH, WEIGHT_WIDTH, OFMAP_WIDTH) mul
+  (
+    .a (ifmap_in),
+    .b (weight_r),
+    .p (prd)
+  );
+
+  adder #(OFMAP_WIDTH, OFMAP_WIDTH, OFMAP_WIDTH) add
+  (
+    .a (prd),
+    .b (ofmap_in),
+    .s (accum)
+  );
+
+  assign ifmap_out = ifmap_r;
+  assign ofmap_out = ofmap_r;
+
+  always_ff @(posedge clk) begin
+    if (!rst_n) begin
+      weight_r <= 0;
+      ifmap_r <= 0;
+      ofmap_r <= 0;
+    end else begin
+      if (en) begin
+        ifmap_r <= ifmap_in;
+        ofmap_r <= accum;
+      end
+
+      if (weight_wen) begin
+        weight_r <= weight_in;
+      end
+    end
+  end   
+
   // Your code ends here
 endmodule

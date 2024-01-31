@@ -2,6 +2,8 @@
 `define WEIGHT_WIDTH 16
 `define OFMAP_WIDTH 32
 
+`include "../verilog/mac.v"
+
 module mac_tb;
 
   reg clk;
