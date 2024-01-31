@@ -4,6 +4,11 @@
 `define ARRAY_HEIGHT 4
 `define ARRAY_WIDTH 4
 
+`include "../verilog/skew_registers.v"
+`include "../verilog/mac.v"
+`include "../verilog/systolic_array.v"
+`include "../verilog/systolic_array_with_skew.v"
+
 module systolic_array_with_skew_tb;
 
   reg clk;
@@ -181,6 +186,7 @@ module systolic_array_with_skew_tb;
     $display("Test finished!");
   end
  
+ /*
   initial begin
     $vcdplusfile("dump.vcd");
     $vcdplusmemon();
@@ -192,6 +198,6 @@ module systolic_array_with_skew_tb;
     `endif
     #20000000;
     $finish(2);
-  end
+  end*/
 
 endmodule

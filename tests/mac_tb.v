@@ -62,6 +62,7 @@ module mac_tb;
     $display("Test finished!");
   end
   
+  /*
   initial begin
     $vcdplusfile("dump.vcd");
     $vcdplusmemon();
@@ -73,6 +74,6 @@ module mac_tb;
     `endif
     #20000000;
     $finish(2);
-  end
+  end*/
 
 endmodule
