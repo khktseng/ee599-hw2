@@ -46,5 +46,53 @@ module accumulation_buffer
 
   // Your code starts here
 
+  wire wen0;
+  wire wen1;
+  wire ren0;
+  wire ren1;
+  wire [BANK_ADDR_WIDTH-1:0] radr0;
+  wire [BANK_ADDR_WIDTH-1:0] radr1;
+  wire [DATA_WIDTH-1:0] rdata0;
+  wire [DATA_WIDTH-1:0] rdata1;
+
+  reg bank_sel_r; // 0: bank 0 writeback. 1: bank 1 writeback
+
+  assign wen0 = bank_sel_r ? wen : 0;
+  assign wen1 = bank_sel_r ? 0 : wen;
+  assign ren0 = bank_sel_r ? ren : ren_wb;
+  assign ren1 = bank_sel_r ? ren_wb : ren;
+  assign radr0 = bank_sel_r ? radr : radr_wb;
+  assign radr1 = bank_sel_r ? radr_wb : radr;
+  assign rdata = bank_sel_r ? rdata0 : rdata1;
+  assign rdata_wb = bank_sel_r ? rdata1 : rdata0;
+
+  ram_sync_1r1w #(
+    .DATA_WIDTH (DATA_WIDTH),
+    .ADDR_WIDTH (BANK_ADDR_WIDTH),
+    .DEPTH (BANK_DEPTH)
+  ) buf0 (
+    .clk (clk),
+    .wen (wen0),
+    .wadr (wadr),
+    .wdata (wdata),
+    .ren (ren0),
+    .radr (radr0),
+    .rdata(rdata0)
+  );
+
+  ram_sync_1r1w #(
+    .DATA_WIDTH (DATA_WIDTH),
+    .ADDR_WIDTH (BANK_ADDR_WIDTH),
+    .DEPTH (BANK_DEPTH)
+  ) buf1 (
+    .clk (clk),
+    .wen (wen1),
+    .wadr (wadr),
+    .wdata (wdata),
+    .ren (ren1),
+    .radr (radr1),
+    .rdata(rdata1)
+  );
+
   // Your code ends here
 endmodule
