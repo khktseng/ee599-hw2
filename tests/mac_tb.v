@@ -2,8 +2,6 @@
 `define WEIGHT_WIDTH 16
 `define OFMAP_WIDTH 32
 
-`include "../verilog/mac.v"
-
 module mac_tb;
 
   reg clk;
@@ -62,7 +60,6 @@ module mac_tb;
     $display("Test finished!");
   end
   
-  /*
   initial begin
     $vcdplusfile("dump.vcd");
     $vcdplusmemon();
@@ -74,6 +71,6 @@ module mac_tb;
     `endif
     #20000000;
     $finish(2);
-  end*/
+  end
 
 endmodule
