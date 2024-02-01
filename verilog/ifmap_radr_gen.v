@@ -59,6 +59,7 @@ module ifmap_radr_gen
 
   always_ff @(posedge clk) begin
     if (rst_n) begin
+      if (adr_en) begin
       if (row_complete) begin
         ox0_r <= 0;
         oy0_r <= oy0_r + config_STRIDE;
@@ -83,6 +84,7 @@ module ifmap_radr_gen
 
       if (ic1_complete) begin
         ic1_r <= 0;
+      end
       end
     end else begin
       ox0_r <= 0;
