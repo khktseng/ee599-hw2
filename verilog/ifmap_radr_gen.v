@@ -61,7 +61,7 @@ module ifmap_radr_gen
     if (rst_n) begin
       if (row_complete) begin
         ox0_r <= 0;
-        oy0_r <= oy0_r + inc_oy0;
+        oy0_r <= oy0_r + config_STRIDE;
       end else begin
         ox0_r <= ox0_r + config_STRIDE;
       end
@@ -78,7 +78,7 @@ module ifmap_radr_gen
 
       if (fy_complete) begin
         fy_r <= 0;
-        ic1_r <= ic1_r + inc_ic1;
+        ic1_r <= ic1_r + 1;
       end
 
       if (ic1_complete) begin
