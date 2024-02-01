@@ -37,5 +37,61 @@ module ifmap_radr_gen
   
   // Your code starts here
 
+  reg [BANK_ADDR_WIDTH-1:0] ox0_r;
+  reg [BANK_ADDR_WIDTH-1:0] oy0_r;
+  reg [BANK_ADDR_WIDTH-1:0] fx_r;
+  reg [BANK_ADDR_WIDTH-1:0] fy_r;
+  reg [BANK_ADDR_WIDTH-1:0] ic1_r;
+
+  wire row_complete;
+  wire col_complete;
+  wire fx_complete;
+  wire fy_complete;
+  wire ic1_complete;
+  
+  assign row_complete = (ox_r + config_FX) == config_IX0;
+  assign col_complete = (oy_r + config_FY) == config_IY0;
+  assign fx_complete = fx_r == config_FX;
+  assign fy_complete = fy_r == config_FY;
+  assign ic1_complete = ic1_r == config_IC1;
+
+  assign adr = ox0_r + fx_r + (oy0_r + fy_r) * config_IX0 + config_IX0 * config_IX0 * ic1_r;
+
+  always_ff @(posedge clk) begin
+    if (rst_n) begin
+      if (row_complete) begin
+        ox0_r <= 0;
+        oy0_r <= oy0_r + inc_oy0;
+      end else begin
+        ox0_r <= ox0_r + config_STRIDE;
+      end
+
+      if (col_complete) begin
+        oy0_r <= 0;
+        fx_r <= fx_r + 1;
+      end
+
+      if (fx_complete) begin
+        fx_r <= 0;
+        fy_r <= fy_r + 1;
+      end
+
+      if (fy_complete) begin
+        fy_r <= 0;
+        ic1_r <= ic1_r + inc_ic1;
+      end
+
+      if (ic1_complete) begin
+        ic1_r <= 0;
+      end
+    end else begin
+      ox0_r <= 0;
+      oy0_r <= 0;
+      fx_r <= 0;
+      fy_r <= 0;
+      ic1_r <= 0;
+    end
+  end
+
   // Your code ends here
 endmodule
