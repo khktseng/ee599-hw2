@@ -49,8 +49,8 @@ module ifmap_radr_gen
   wire fy_complete;
   wire ic1_complete;
   
-  assign row_complete = (ox_r + config_FX) == config_IX0;
-  assign col_complete = (oy_r + config_FY) == config_IY0;
+  assign row_complete = (ox0_r + config_FX) == config_IX0;
+  assign col_complete = (oy0_r + config_FY) == config_IY0;
   assign fx_complete = fx_r == config_FX;
   assign fy_complete = fy_r == config_FY;
   assign ic1_complete = ic1_r == config_IC1;
