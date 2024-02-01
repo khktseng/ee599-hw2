@@ -29,5 +29,26 @@ module adr_gen_sequential
 
   // Your code starts here
 
+  reg [BANK_ADDR_WIDTH-1:0] adr_curr_r;
+
+  assign adr = adr_cur_r;
+
+  always_ff @(posedge clk) begin
+    if (!rst_n) begin
+      config_block_max <= 0;
+      adr_curr_r <= 0;
+    end else begin
+      if (config_en) begin
+        config_block_max <= config_data;
+        adr_curr_r <= 0;
+      end else if (adr_en) begin
+        if (adr_curr_r == config_block_max)
+          adr_cur_r <= 0;
+        else
+          adr_cur_r <= adr_cur_r + 1;
+      end
+    end
+  end
+
   // Your code ends here
 endmodule
