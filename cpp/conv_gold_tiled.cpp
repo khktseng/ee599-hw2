@@ -25,11 +25,11 @@ void conv_gold_tiled(int16_t ifmap[(OY1*OY0-1)*STRIDE+FY][(OX1*OX0-1)*STRIDE+FX]
                         for (int fx = 0; fx < FX; fx++) {
                             for (int oy0 = 0; oy0 < OY0; oy0++) {
                                 for (int ox0 = 0; ox0 < OX0; ox0++) {
-                                    for (int oc0 = 0; oc0 < OC0; oc0++) {
+                                    for (int oc0 = 0; oc0 < OC0; oc0++) { // unrolled
                                         int oy = oy1*OY0 + oy0;
                                         int ox = ox1*OX0 + ox0;
                                         int oc = oc1*OC0 + oc0;
-                                        for(int ic0 = 0; ic0 < IC0; ic0++) {
+                                        for(int ic0 = 0; ic0 < IC0; ic0++) { // unrolled
                                             int ic = ic1*IC0 + ic0;
 
 											ofmap[oy][ox][oc] += 
