@@ -94,5 +94,15 @@ module accumulation_buffer
     .rdata(rdata1)
   );
 
+  always_ff @(posedge clk) begin
+    if (~rst_n) begin
+      bank_sel_r <= 0;
+    end else begin
+      if (switch_banks) begin
+        bank_sel_r <= ~bank_sel_r;
+      end
+    end
+  end
+
   // Your code ends here
 endmodule
