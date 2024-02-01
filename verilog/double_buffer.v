@@ -2,7 +2,7 @@ module double_buffer
 #( 
   parameter DATA_WIDTH = 64,
   parameter BANK_ADDR_WIDTH = 7,
-  parameter [BANK_ADDR_WIDTH : 0] BANK_DEPTH = 128
+  parameter BANK_DEPTH = 128
 )(
   input clk,
   input rst_n,
@@ -29,6 +29,36 @@ module double_buffer
 
   // Your code starts here
 
+  localparam DEPTH = 2 * BANK_DEPTH;
+  localparam ADDR_WIDTH = BANK_ADDR_WIDTH + 1;
+
+  reg bank_sel_r;
+  wire [ADDR_WIDTH-1:0] radr_sel;
+  wire [ADDR_WIDTH-1:0] wadr_sel;
+  
+  assign radr_sel = {bank_sel_r, radr};
+  assign wadr_sel = {~bank_sel_r, wadr};
+
+  ram_sync_1r1w #(DATA_WIDTH, ADDR_WIDTH, DEPTH)
+  (
+    .clk (clk),
+    .wen (wen),
+    .wadr (wadr_sel),
+    .wdata (wdata),
+    .ren (ren),
+    .radr (radr_sel),
+    .rdata (rdata)
+  );
+
+  always_ff @(posedge clk) begin
+    if (!rst_n) begin
+      bank_sel_r <= 0;
+    end else begin
+      if (switch_banks) begin
+        bank_sel_r <= ~bank_sel_r;
+      end
+    end
+  end
  
   // Your code ends here
 endmodule
