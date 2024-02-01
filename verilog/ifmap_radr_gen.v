@@ -51,9 +51,9 @@ module ifmap_radr_gen
   
   assign row_complete = (ox0_r + config_FX) == config_IX0;
   assign col_complete = ((oy0_r + config_FY) == config_IY0) && row_complete;
-  assign fx_complete = (fx_r == config_FX) && col_complete;
-  assign fy_complete = (fy_r == config_FY) && fx_complete;
-  assign ic1_complete = (ic1_r == config_IC1) && fy_complete;
+  assign fx_complete = (fx_r + 1 == config_FX) && col_complete;
+  assign fy_complete = (fy_r + 1 == config_FY) && fx_complete;
+  assign ic1_complete = (ic1_r + 1 == config_IC1) && fy_complete;
 
   assign adr = ox0_r + fx_r + (oy0_r + fy_r) * config_IX0 + config_IX0 * config_IX0 * ic1_r;
 
