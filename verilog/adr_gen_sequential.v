@@ -43,9 +43,9 @@ module adr_gen_sequential
         adr_curr_r <= 'b0;
       end else if (adr_en) begin
         if (adr_curr_r == config_block_max)
-          adr_cur_r <= 'b0;
+          adr_curr_r <= 'b0;
         else
-          adr_cur_r <= adr_cur_r + 'b1;
+          adr_curr_r <= adr_curr_r + 'b1;
       end
     end
   end
