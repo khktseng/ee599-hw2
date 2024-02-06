@@ -55,10 +55,15 @@ module accumulation_buffer_tb;
 		radr_wb <= 0;
 		#20 rst_n <= 1;
 
+		wen <= 1;
+		wadr <= 'h1F;
+		wdata = 0;
+		#10;
+
 		wen <= 0;
 		wadr <= 'h1F;
 		wdata <= 'hDEADBEEF;
-		
+
 		#20;
 		ren <= 1;
 		radr <= 'h1F;
