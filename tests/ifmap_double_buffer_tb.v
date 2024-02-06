@@ -63,7 +63,7 @@ module ifmap_double_buffer_tb;
 			wadr <= i;
 			wdata <= i * 'h10;
 			#10;
-
+		
 			assert(rdata == i);
 
 		end
@@ -76,6 +76,7 @@ module ifmap_double_buffer_tb;
 		for (i = 0; i < 8; i++) begin
 			ren <= 1;
 			radr <= i;
+			#10;
 			assert(rdata == i * 'h10);
 		end
 

@@ -39,8 +39,11 @@ module double_buffer
   assign radr_sel = {bank_sel_r, radr};
   assign wadr_sel = {~bank_sel_r, wadr};
 
-  ram_sync_1r1w #(DATA_WIDTH, ADDR_WIDTH, DEPTH)
-  (
+  ram_sync_1r1w #(
+    DATA_WIDTH,
+    ADDR_WIDTH,
+    DEPTH
+  ) buf0 (
     .clk (clk),
     .wen (wen),
     .wadr (wadr_sel),
