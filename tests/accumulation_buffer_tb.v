@@ -14,7 +14,7 @@ module accumulation_buffer_tb;
 	logic [`DATA_WIDTH-1:0] rdata;
 
 	logic wen;
-	logic [`BANK_ADR_WIDTH-1:0] wadr;
+	logic [`BANK_ADDR_WIDTH-1:0] wadr;
 	logic [`DATA_WIDTH-1:0] wdata;
 
 	logic ren_wb;
