@@ -17,13 +17,20 @@ module ram_sync_1r1w
   reg [DATA_WIDTH - 1 : 0] rdata_reg;
   
   reg [DATA_WIDTH - 1 : 0] mem [DEPTH - 1 : 0];
+
+  logic write_forward;
+  assign write_forward = radr == wadr && wen;
   
   always @(posedge clk) begin
     if (wen) begin
       mem[wadr] <= wdata; // write port
     end
     if (ren) begin
-      rdata_reg <= mem[radr]; // read port
+      if (write_forward) begin
+        rdata_reg <= wdata;
+      end else begin
+        rdata_reg <= mem[radr]; // read port
+      end
     end
   end
   // synopsys translate_on
