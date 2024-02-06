@@ -10,16 +10,16 @@ module accumulation_buffer_tb;
 	logic switch_banks;
 	
 	logic ren;
-	logic [BANK_ADDR_WIDTH-1:0] radr;
-	logic [DATA_WIDTH-1:0] rdata;
+	logic [`BANK_ADDR_WIDTH-1:0] radr;
+	logic [`DATA_WIDTH-1:0] rdata;
 
 	logic wen;
-	logic [BANK_ADR_WIDTH-1:0] wadr;
-	logic [DATA_WIDTH-1:0] wdata;
+	logic [`BANK_ADR_WIDTH-1:0] wadr;
+	logic [`DATA_WIDTH-1:0] wdata;
 
 	logic ren_wb;
-	logic [BANK_ADDR_WIDTH-1:0] radr_wb;
-	logic [DATA_WIDTH-1:0] rdata_wb;
+	logic [`BANK_ADDR_WIDTH-1:0] radr_wb;
+	logic [`DATA_WIDTH-1:0] rdata_wb;
 
 	accumulation_buffer #(
 		.DATA_WIDTH(`DATA_WIDTH),
@@ -89,6 +89,8 @@ module accumulation_buffer_tb;
 			#10;
 			assert(rdata == i * 'h10);;
 		end
+		#20;
+		$finish;
 	end
 
 
