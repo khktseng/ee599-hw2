@@ -81,7 +81,19 @@ module ifmap_double_buffer_tb;
 
 		#10;
 
-		$finish;
+		initial begin
+    		$vcdplusfile("dump.vcd");
+    		$vcdplusmemon();
+   		 	$vcdpluson(0, ifmap_double_buffer_tb);
+    		`ifdef FSDB
+    		$fsdbDumpfile("dump.fsdb");
+    		$fsdbDumpvars(0, ifmap_double_buffer_tb);
+    		$fsdbDumpMDA();
+    		`endif
+    		#20000000;
+    		$finish(2);
+		end
+  end
 
 
 	end
