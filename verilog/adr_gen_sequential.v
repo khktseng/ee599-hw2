@@ -31,7 +31,7 @@ module adr_gen_sequential
 
   reg [BANK_ADDR_WIDTH-1:0] adr_curr_r;
 
-  assign adr = adr_cur_r;
+  assign adr = adr_curr_r;
 
   always_ff @(posedge clk) begin
     if (!rst_n) begin
