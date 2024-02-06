@@ -54,7 +54,13 @@ module accumulation_buffer_tb;
 		ren_wb <= 0;
 		radr_wb <= 0;
 		#20 rst_n <= 1;
-		#40;
+		#20;
+		ren <= 1;
+		radr <= 'h1F;
+		#10;
+		assert(rdata != 'hDEADBEEF);
+		ren <= 0;
+		#10;
 
 		for (i = 0; i < 16; i = i + 1) begin
 			wen <= 1;
