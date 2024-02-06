@@ -48,6 +48,7 @@ module ifmap_double_buffer_tb;
 			wadr <= i;
 			wdata <= i;
 			#10;
+			$display("wdata=%h, i=%d", wdata, i);
 		end
 
 		wen <= 0;
@@ -55,7 +56,7 @@ module ifmap_double_buffer_tb;
 		#10 switch_banks <= 0;
 
 		for (i = 0; i < 8; i++) begin
-			ren <= 0;
+			ren <= 1;
 			radr <= i;
 
 			wen <= 1;
@@ -73,7 +74,7 @@ module ifmap_double_buffer_tb;
 		#10 switch_banks <= 0;
 
 		for (i = 0; i < 8; i++) begin
-			ren <= 0;
+			ren <= 1;
 			radr <= i;
 			assert(rdata == i * 'h10);
 		end
