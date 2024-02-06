@@ -15,7 +15,7 @@ module ifmap_double_buffer_tb;
 	logic [`BANK_ADDR_WIDTH-1:0] wadr;
 	logic [`DATA_WIDTH-1:0] wdata;
 
-	always #10 clk = ~clk;
+	always #5 clk = ~clk;
 
 	double_buffer #(
 		.DATA_WIDTH(`DATA_WIDTH),
@@ -35,6 +35,8 @@ module ifmap_double_buffer_tb;
 
 	integer i;
 	initial begin
+		$dumpfile("dump.vcd");
+		$dumpvars(0, ifmap_double_buffer_tb);
 		clk <= 0;
 		rst_n <= 1;
 		switch_banks <= 0;
@@ -48,7 +50,6 @@ module ifmap_double_buffer_tb;
 			wadr <= i;
 			wdata <= i;
 			#10;
-			$display("wdata=%h, i=%d", wdata, i);
 		end
 
 		wen <= 0;
@@ -63,7 +64,9 @@ module ifmap_double_buffer_tb;
 			wadr <= i;
 			wdata <= i * 'h10;
 			#10;
-		
+			ren <= 0;
+			wen <= 0;
+			#10;
 			assert(rdata == i);
 
 		end
@@ -77,23 +80,26 @@ module ifmap_double_buffer_tb;
 			ren <= 1;
 			radr <= i;
 			#10;
+			ren <= 0;
+			#10;
 			assert(rdata == i * 'h10);
 		end
 
 		#10;
 	end
 
+/*
 	initial begin
-    		$vcdplusfile("dump.vcd");
-    		$vcdplusmemon();
-   		 	$vcdpluson(0, ifmap_double_buffer_tb);
-    		`ifdef FSDB
-    		$fsdbDumpfile("dump.fsdb");
-    		$fsdbDumpvars(0, ifmap_double_buffer_tb);
-    		$fsdbDumpMDA();
-    		`endif
-    		#20000000;
-    		$finish(2);
-	end
+    	$vcdplusfile("dump.vcd");
+    	$vcdplusmemon();
+	 	$vcdpluson(0, ifmap_double_buffer_tb);
+    	`ifdef FSDB
+    	$fsdbDumpfile("dump.fsdb");
+		$fsdbDumpvars(0, ifmap_double_buffer_tb);
+    	$fsdbDumpMDA();
+    	`endif
+		#20000000;
+    	$finish(2);
+	end*/
 
 endmodule
