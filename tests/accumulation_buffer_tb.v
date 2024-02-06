@@ -49,11 +49,16 @@ module accumulation_buffer_tb;
 		ren <= 0;
 		radr <= 0;
 		wen <= 0;
-		wadr <= 'h1F;
-		wdata <= 'hDEADBEEF;
+		wadr <= 0;
+		wdata <= 0;
 		ren_wb <= 0;
 		radr_wb <= 0;
 		#20 rst_n <= 1;
+
+		wen <= 0;
+		wadr <= 'h1F;
+		wdata <= 'hDEADBEEF;
+		
 		#20;
 		ren <= 1;
 		radr <= 'h1F;
