@@ -87,9 +87,33 @@ module accumulation_buffer_tb;
 			ren <= 1;
 			radr <= i;
 			#10;
-			assert(rdata == i * 'h10);;
+			assert(rdata == i * 'h10);
 		end
+		ren <= 0;
+		switch_banks <= 1;
+		#10;
+		switch_banks <= 0;
 		#20;
+
+		// Test memory write forwarding
+		for (i = 0; i < 16; i++) begin
+			wen <= 1;
+			wadr <= i;
+			wdata <= i * 'h10;
+
+			ren <= 1;
+			radr <= i;
+
+			ren_wb <= 1;
+			radr_wb <= i;
+			#10;
+			assert(rdata == i * 'h10);
+			assert(rdata_wb == i * 'h10);
+		end
+		wen <= 0;
+		ren <= 0;
+		ren_wb <= 0;
+		#10;
 		$finish;
 	end
 
