@@ -35,17 +35,17 @@ module adr_gen_sequential
 
   always_ff @(posedge clk) begin
     if (!rst_n) begin
-      config_block_max <= 0;
-      adr_curr_r <= 0;
+      config_block_max <= 'b0;
+      adr_curr_r <= 'b0;
     end else begin
       if (config_en) begin
         config_block_max <= config_data;
-        adr_curr_r <= 0;
+        adr_curr_r <= 'b0;
       end else if (adr_en) begin
         if (adr_curr_r == config_block_max)
-          adr_cur_r <= 0;
+          adr_cur_r <= 'b0;
         else
-          adr_cur_r <= adr_cur_r + 1;
+          adr_cur_r <= adr_cur_r + 'b1;
       end
     end
   end
