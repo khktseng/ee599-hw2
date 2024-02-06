@@ -80,8 +80,9 @@ module ifmap_double_buffer_tb;
 		end
 
 		#10;
+	end
 
-		initial begin
+	initial begin
     		$vcdplusfile("dump.vcd");
     		$vcdplusmemon();
    		 	$vcdpluson(0, ifmap_double_buffer_tb);
@@ -92,10 +93,6 @@ module ifmap_double_buffer_tb;
     		`endif
     		#20000000;
     		$finish(2);
-		end
-  end
-
-
 	end
 
 endmodule
