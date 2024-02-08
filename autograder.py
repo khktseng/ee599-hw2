@@ -137,6 +137,11 @@ def test_accumulation_buffer_tb():
     print("Running test_accumulation_buffer_tb")
     return run_process(['vcs', '-full64', '-sverilog', '-timescale=1ns/1ps', '-debug_access+pp', 'tests/accumulation_buffer_tb.v', 'verilog/accumulation_buffer.v', 'verilog/ram_sync_1r1w.v'])
 
+def test_fifo_tb():
+    print("Running test_fifo_tb")
+    return run_process(['vcs', '-full64', '-sverilog', '-timescale=1ns/1ps', '-debug_access+pp', 'tests/fifo_tb.v', 'verilog/fifo.v', 'verilog/SizedFifo.v'])
+
+
 args = sys.argv
 args_len = len(sys.argv)
 
