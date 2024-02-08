@@ -18,7 +18,7 @@ module fifo_tb;
 	logic [`DATA_WIDTH-1:0] din;
 	logic enq;
 	logic full_n;
-	logic [`DATA_WIDTH-1:-] dout;
+	logic [`DATA_WIDTH-1:0] dout;
 	logic deq;
 	logic empty_n;
 
