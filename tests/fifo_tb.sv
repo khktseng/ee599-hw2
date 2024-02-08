@@ -39,14 +39,14 @@ module fifo_tb;
     );
 
 	initial begin
-		$monitor("#%d: rst_n=%b, din=%0h, enq=%b, deq=%b, dout=%0h", clk_cnt, rst_n, din, enq, deq, dout);
+		$monitor("#%d: rst_n=%b, empty_n=%b, din=%0h, enq=%b, deq=%b, dout=%0h", clk_cnt, rst_n, empty_n, din, enq, deq, dout);
 		rst_n = 0;
 		clr = 0;
 		din = 0;
 		enq = 0;
 		deq = 0;
 
-		#15;
+		#20;
 		rst_n = 1;
 		#20;
 		din = 'hC;
